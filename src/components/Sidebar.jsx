@@ -1,10 +1,12 @@
 import { Children, useState } from "react";
 import { playlists, subscriptions } from "../data/sidebarData";
+import { useSidebarContext } from "../utils/SidebarContext";
 
 export default function Sidebar() {
+    const { isLargeOpen, isSmallOpen } = useSidebarContext();
     return (
         <section className="min-h-screen relative top-0">
-            <aside className="lg:hidden h-full sticky top-0 overflow-y-auto p-2 flex flex-col ml-1 mt-4 shadow-md">
+            <aside className={`${isLargeOpen ? 'lg:hidden' : 'lg:flex'} h-[100vh] hidden sticky top-0 overflow-y-auto p-2 flex-col ml-1 mt-4 shadow-md transition-all delay-500`}>
                 <SidebarItems icon="fa-home" title="Home" url="/" />
 
                 <SidebarItems icon="fa-repeat" title="Shorts" url="/" />
@@ -12,7 +14,7 @@ export default function Sidebar() {
                 <SidebarItems icon="fa-lines-leaning" title="Library" url="/library" />
             </aside>
 
-            <aside className="hidden h-[100vh] lg:sticky absolute w-56 top-0 overflow-y-scroll scrollbar-hidden lg:flex flex-col items-center gap-2 px-5 mt-4">
+            <aside className={`h-[100vh] lg:sticky absolute w-56 top-0 overflow-y-scroll scrollbar-hidden ${isLargeOpen ? "lg:flex" : "lg:hidden"} ${isSmallOpen ? 'flex z-[999] bg-white min-h-screen' : 'hidden'} flex-col items-center gap-2 px-5 mt-4 transition-all delay-500`}>
                 <LargeSideBarSection>
                     <LargesideBarIcon icon="fa-home" title="Home" url="/" />
                     <LargesideBarIcon icon="fa-video" title="Subscriptions" url="/" />
@@ -91,7 +93,7 @@ function LargesideBarIcon({ icon, iconImage, title, url, isActive, className }) 
     return (
         <a href={url} className={`w-full flex items-center p-2 mb-2 rounded-lg transition-colors ${isActive ? 'bg-black text-white' : 'hover:bg-gray-300'}`}>
             {icon ? <i className={`fa-solid ${icon}`}></i> : (<img className="w-5 h-5 rounded-full" src={iconImage} />)}
-            <p className={`hidden md:inline-block ml-5 ${className || 'text-sm'}`}>{title}</p>
+            <p className={`ml-5 ${className || 'text-sm'}`}>{title}</p>
         </a>
     )
 }
@@ -100,7 +102,7 @@ function SidebarItems({ icon, title, url }) {
     return (
         <a href={url} className="text-center mb-5 flex flex-col">
             <i className={`fa-solid ${icon}`}></i>
-            <p className="hidden md:inline-block text-sm">{title}</p>
+            <p className="text-[0.8rem]">{title}</p>
         </a>
     )
 }

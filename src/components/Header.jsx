@@ -1,4 +1,5 @@
 import youtubeLogo from "../assets/youtube-logo.png"
+import { useSidebarContext } from "../utils/SidebarContext"
 
 function HeaderButtons({ className, children }) {
     return (
@@ -9,10 +10,15 @@ function HeaderButtons({ className, children }) {
 }
 
 export default function Header() {
+    const { toggle } = useSidebarContext();
     return (
         <header className="py-3 px-5 flex items-center justify-between shadow-xl">
             <figure className="w-24 flex items-center gap-4">
-                <i className="text-xl fa-solid fa-bars"></i>
+                <i onClick={(e) => {
+                    toggle();
+                    e.target.classList.toggle('rotate-180');
+                }
+                } className="transition-transform cursor-pointer text-xl fa-solid fa-bars"></i>
                 <img src={youtubeLogo} className="w-full" alt="youtube logo png image" width={200} />
             </figure>
 
