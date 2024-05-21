@@ -14,7 +14,7 @@ export default function Sidebar() {
                 <SidebarItems icon="fa-lines-leaning" title="Library" url="/library" />
             </aside>
 
-            <aside className={`h-[100vh] lg:sticky absolute w-56 top-0 overflow-y-scroll scrollbar-hidden ${isLargeOpen ? "lg:flex" : "lg:hidden"} ${isSmallOpen ? 'flex z-[999] bg-white min-h-screen' : 'hidden'} flex-col items-center gap-2 px-5 mt-4 transition-all delay-500`}>
+            <aside className={`h-[100vh] lg:sticky absolute w-48 top-0 overflow-y-scroll scrollbar-hidden ${isLargeOpen ? "lg:flex" : "lg:hidden"} ${isSmallOpen ? 'flex z-[999] bg-white min-h-screen' : 'hidden'} flex-col items-center gap-2 px-5 mt-4 transition-all delay-500`}>
                 <LargeSideBarSection>
                     <LargesideBarIcon icon="fa-home" title="Home" url="/" />
                     <LargesideBarIcon icon="fa-video" title="Subscriptions" url="/" />
