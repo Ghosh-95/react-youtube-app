@@ -1,5 +1,6 @@
 import youtubeLogo from "../assets/youtube-logo.png";
 import { useAPIData } from "../utils/useAPIData";
+import useContentDuration from "../utils/useContentDuration";
 import useTimeDiff from "../utils/useTimeDiff";
 import useViewCount from "../utils/useViewCount";
 
@@ -8,12 +9,13 @@ function VideoItems({ data }) {
     const { channelTitle, localized: { title, description }, thumbnails: { standard: { url } }, publishedAt } = data.snippet;
 
     const { viewCount } = data.statistics;
+    const { duration } = data.contentDetails;
 
     return (
         <div className="transition-transform hover:shadow-xl flex flex-col gap-2 w-full md:w-[20rem] rounded-lg h-[22rem] px-1">
             <a href={'/'} className="rounded-t-lg relative h-[60%] grid place-items-center">
                 <img src={url} alt="" className="rounded-t-lg h-[14rem] w-full" />
-                <p className="absolute text-white right-3 -bottom-2">5:34:00</p>
+                <p className="absolute text-white right-3 -bottom-2">{useContentDuration(duration)}</p>
             </a>
 
             <section className="flex gap-6 items-start mt-7 px-3">
@@ -35,6 +37,7 @@ function VideoItems({ data }) {
 export default function Videos() {
 
     const data = useAPIData();
+    console.log(data);
 
     return data && (
         <article className="w-[99%] mx-auto my-5" >
