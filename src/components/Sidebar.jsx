@@ -3,10 +3,10 @@ import { playlists, subscriptions } from "../data/sidebarData";
 import { useSidebarContext } from "../utils/SidebarContext";
 
 export default function Sidebar() {
-    const { isLargeOpen, isSmallOpen } = useSidebarContext();
+    const { isLargeOpen, isSmallOpen, closed } = useSidebarContext();
     return (
-        <section className="min-h-screen relative top-0">
-            <aside className={`${isLargeOpen ? 'lg:hidden' : 'lg:flex'} h-[100vh] hidden sticky top-0 overflow-y-auto p-2 flex-col ml-1 mt-4 shadow-md transition-all delay-500`}>
+        <section className="min-h-screen displ relative top-0">
+            <aside className={`${isLargeOpen ? 'lg:hidden' : 'lg:flex'} ${closed && 'lg:hidden'} h-[100vh] hidden sticky top-0 overflow-y-auto p-2 flex-col ml-1 mt-4 shadow-md transition-all delay-500`}>
                 <SidebarItems icon="fa-home" title="Home" url="/" />
 
                 <SidebarItems icon="fa-repeat" title="Shorts" url="/" />
